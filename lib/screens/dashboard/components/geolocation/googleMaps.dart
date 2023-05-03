@@ -124,18 +124,18 @@ class _GoogleMapsState extends State<GoogleMaps> {
                               offset: Offset(0.7, 0.7))
                         ],
                       ),
-                      child: Padding(
+                      child:  Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
                           children: const [
-                            Icon(
+                             Icon(
                               Icons.search,
                               color: Colors.lightBlueAccent,
                             ),
-                            SizedBox(
+                             SizedBox(
                               width: 20.0,
                             ),
-                            Text("Search Pharamcy")
+                             Text("Search Pharamcy")
                           ],
                         ),
                       ),
@@ -152,11 +152,11 @@ class _GoogleMapsState extends State<GoogleMaps> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text("Add location"),
+                             Text("Add location"),
                             SizedBox(
                               height: 4.0,
                             ),
-                            Text(
+                             Text(
                               "Your current address",
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 12.0),
@@ -172,7 +172,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
                     const SizedBox(
                       height: 16.0,
                     ),
-                    Row(
+                     Row(
                       children: [
                         const Icon(Icons.work, color: Colors.grey),
                         const SizedBox(
@@ -181,11 +181,11 @@ class _GoogleMapsState extends State<GoogleMaps> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text("Add location"),
-                            SizedBox(
+                             Text("Add location"),
+                             SizedBox(
                               height: 4.0,
                             ),
-                            Text(
+                             Text(
                               "Your destination address",
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 12.0),

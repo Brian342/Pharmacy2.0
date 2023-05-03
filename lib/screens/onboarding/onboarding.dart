@@ -147,7 +147,7 @@ class Slider extends StatelessWidget {
   final String? image, title, description;
 
   //constructor
-  Slider({this.image, this.title, this.description});
+  const Slider({super.key, this.image, this.title, this.description});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -161,32 +161,32 @@ class Slider extends StatelessWidget {
               image.toString(),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
-            padding: EdgeInsets.only(left: 0.9, right: 0.9),
+            padding: const EdgeInsets.only(left: 0.9, right: 0.9),
             child: Text(
               title.toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
                 color: Color.fromARGB(255, 151, 22, 22),
               ),
             ),
           ),
-          SizedBox(height: 2.5),
+          const SizedBox(height: 2.5),
           Padding(
-            padding: EdgeInsets.only(left: 6, right: 6),
+            padding: const EdgeInsets.only(left: 6, right: 6),
             child: Text(
               description.toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 30,
               ),
             ),
           ),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
         ],
       ),
     );

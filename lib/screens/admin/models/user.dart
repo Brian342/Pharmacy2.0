@@ -1,4 +1,5 @@
 import 'package:brianpharmacy/screens/admin/models/drug.dart';
+//datatype
 class User {
   String? id;
   String name;
@@ -6,7 +7,7 @@ class User {
   List<String> location;
   String profession;
   String mobileNumber;
-
+//constructor
   User({
     this.id,
     required this.name,
@@ -15,7 +16,7 @@ class User {
     required this.profession,
     required this.mobileNumber,
   });
-
+// converting json file into a data 
   factory User.fromJson(Map<String, dynamic> json) {
     final List<dynamic> drugJson = json['drugs'] ?? [];
     final List<Drug> drugs = drugJson.map((dynamic item) => Drug.fromJson(item)).toList();
@@ -28,7 +29,7 @@ class User {
       mobileNumber: json['mobileNumber'],
     );
   }
-
+//assigning data to each variable
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

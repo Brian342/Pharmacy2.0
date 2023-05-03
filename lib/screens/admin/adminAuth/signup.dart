@@ -29,6 +29,7 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) => SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(

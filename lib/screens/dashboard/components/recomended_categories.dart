@@ -13,15 +13,15 @@ class RecomendedCategories extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => const GoogleMaps()));
-              },
-              child: const Text("Location")),
+        children: const [
+          // ElevatedButton(
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) => const GoogleMaps()));
+          //     },
+          //     child: const Text("Location")),
           // ElevatedButton(
           //     onPressed: () {
           //       Navigator.push(
@@ -30,16 +30,16 @@ class RecomendedCategories extends StatelessWidget {
           //             builder: (BuildContext context) => MapView(),
           //           ));
           //     },
-              // child: const Text("Pick location")),
-              //  ElevatedButton(
-              // onPressed: () {
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (BuildContext context) => MapView(),
-              //       ));
-              // },
-              // child: const Text("Admin Map view")),
+          // child: const Text("Pick location")),
+          //  ElevatedButton(
+          // onPressed: () {
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => MapView(),
+          //       ));
+          // },
+          // child: const Text("Admin Map view")),
           // RecomendedDrugs(
           //     image: "assets/images/pills2.png", title: "Pills", press: () {}),
           // RecomendedDrugs(

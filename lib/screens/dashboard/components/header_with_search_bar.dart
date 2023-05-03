@@ -3,7 +3,6 @@ import 'package:brianpharmacy/screens/admin/models/drug.dart';
 import 'package:brianpharmacy/screens/dashboard/components/geolocation/geolocation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class HeaderWithSearchBox extends StatefulWidget {
   const HeaderWithSearchBox({
@@ -133,28 +132,45 @@ class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
                           child: CircularProgressIndicator(),
                         );
                       }
-                      String query = '';
+                      String query = drug.toLowerCase();
                       final filteredDocs = snapshots.data!.docs.where(
                         (doc) {
                           final data = doc.data() as Map<String, dynamic>;
                           final drugs = List<Drug>.from(
-                              data['drugs'].map((d) => Drug.fromJson(d)));
-                          final matches = drugs.any((drug) =>
-                              drug.name.toLowerCase().contains(query));
+                            data['drugs']?.map((d) {
+                              return Drug.fromJson(d);
+                            }),
+                          );
+                          final matches = drugs.any(
+                            (drug) => drug.name.toLowerCase().contains(query),
+                          );
                           return matches;
                         },
                       ).toList();
 
+                      // Create a list of TextSpan widgets for each matched drug
+                      final drugTextSpans = <TextSpan>[];
                       for (final doc in filteredDocs) {
                         final data = doc.data() as Map<String, dynamic>;
                         final drugs = List<Drug>.from(
-                            data['drugs'].map((d) => Drug.fromJson(d)));
+                          data['drugs'].map((d) => Drug.fromJson(d)),
+                        );
                         final matchedDrugs = drugs.where(
-                            (drug) => drug.name.toLowerCase().contains(query));
+                          (drug) => drug.name.toLowerCase().contains(query),
+                        );
                         for (final drug in matchedDrugs) {
-                          print(drug.name);
+                          // Add a new TextSpan widget for each matched drug
+                          drugTextSpans.add(TextSpan(
+                            text: '${drug.name} - ${drug.price}, ',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ));
                         }
                       }
+
+                      // Return the ListView.builder with the drugTextSpans
                       return ListView.builder(
                         itemCount: filteredDocs.length,
                         itemBuilder: (context, index) {
@@ -168,7 +184,7 @@ class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
                                   return AlertDialog(
                                     title: const Text('Pharmacy'),
                                     content: const Text(
-                                        'Do you want to view this pharamcy details?'),
+                                        'Do you want to view this pharmacy details?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
@@ -195,40 +211,26 @@ class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
                                 },
                               );
                             },
-                            child: ListTile(
-                              isThreeLine: true,
-                              leading: Text(data['profession']),
-                              title: Text(data['name']),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 8),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        const TextSpan(
-                                          text: 'Drug: ',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: data['drugs'][index]['name'],
-                                        ),
-                                        const TextSpan(
-                                          text: ' Price: ',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: data['drugs'][index]['price']
-                                              .toString(),
-                                        ),
-                                      ],
-                                    ),
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: kDefaultPadding,
+                                vertical: kDefaultPadding / 2,
+                              ),
+                              padding:
+                                  const EdgeInsets.all(kDefaultPadding / 2),
+                              decoration: BoxDecoration(
+                                color: kSecondaryColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '${data['name']} : ',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                ],
+                                  children: drugTextSpans,
+                                ),
                               ),
                             ),
                           );
